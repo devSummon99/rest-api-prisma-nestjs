@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Service {
-  id Int @id @default(autoincrement)
+  id Int @id @default(autoincrement())
   title String 
   description String
   type String?
@@ -22,18 +22,18 @@ model Service {
 }
 
 model Order {
-  id Int @id @default(autoincrement)
-  userID Int @id
-  serviceID Int @id
-  date Date
+  id Int @id @default(autoincrement())
+  userID Int
+  serviceID Int
+  date String
   state String
   description String?
 }
 
 model User {
-  id Int @id @default(autoincrement)
+  id Int @id @default(autoincrement())
   username String
-  email String @email
-  password String @password
+  email String 
+  password String 
   role String
 }
