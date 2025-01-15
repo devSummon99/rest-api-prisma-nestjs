@@ -42,7 +42,7 @@ export class ServiceController {
       console.log(service)
       if (service === null) {
         console.log('404')
-        throw  new NotFoundException(`Service with id ${id} not found`);
+        throw new NotFoundException(`Service with id ${id} not found`);
        }
       return service;
     } catch (error) {
@@ -67,7 +67,7 @@ export class ServiceController {
       }
       await this.serviceService.updateService(data, id);
     } catch (error) {
-      throw new InternalServerErrorException("Internal Server Error");
+       new InternalServerErrorException("Internal Server Error");
     }
   }
 
