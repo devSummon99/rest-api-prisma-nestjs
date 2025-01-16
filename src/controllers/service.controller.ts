@@ -23,9 +23,9 @@ export class ServiceController {
   @Get()
   async getAllServices() {
     try {
-      const services =  await this.serviceService.getAllServices();
-       if (services.length === 0) {
-       return new NotFoundException("No services found") ;
+      const services = await this.serviceService.getAllServices();
+      if (services.length === 0) {
+        return new NotFoundException("No services found");
       }
       return services;
     } catch (error) {
@@ -39,14 +39,14 @@ export class ServiceController {
   ): Promise<Service> {
     try {
       const service = await this.serviceService.getServiceByID(id);
-      console.log(service)
+      console.log(service);
       if (service === null) {
-        console.log('404')
+        console.log("404");
         throw new NotFoundException(`Service with id ${id} not found`);
-       }
+      }
       return service;
     } catch (error) {
-       new InternalServerErrorException("Internal Server Error");
+      new InternalServerErrorException("Internal Server Error");
     }
   }
 
@@ -62,12 +62,14 @@ export class ServiceController {
   ) {
     try {
       const service = await this.serviceService.getServiceByID(id);
-      if (!service) {
-        throw new NotFoundException(`Service with id ${id} not found`);
+      console.log(service);
+         if (service == null) {
+            console.log("40444");
+            throw new NotFoundException(`Service with id ${id} not found`);
       }
       await this.serviceService.updateService(data, id);
     } catch (error) {
-       new InternalServerErrorException("Internal Server Error");
+      new InternalServerErrorException("Internal Server Error");
     }
   }
 
@@ -75,13 +77,14 @@ export class ServiceController {
   async deleteService(@Param("id", ParseIntPipe) id: number): Promise<Service> {
     try {
       const serviceDeleted = await this.serviceService.getServiceByID(id);
-      if (!serviceDeleted) {
+      if (serviceDeleted === null) {
+        console.log("4044");
         throw new NotFoundException(`Service with id ${id} not found`);
       }
       await this.serviceService.deleteService(id);
       return serviceDeleted;
     } catch (error) {
-      throw new InternalServerErrorException("Internal Server Error");
+       new InternalServerErrorException("Internal Server Error");
     }
   }
 }
